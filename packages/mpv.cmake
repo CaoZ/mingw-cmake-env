@@ -17,7 +17,7 @@ ExternalProject_Add(
           uchardet
           vulkan-loader
           winrt-headers
-  GIT_REPOSITORY https://github.com/mpv-player/mpv.git
+  GIT_REPOSITORY https://github.com/CaoZ/mpv.git
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND
     ${EXEC} meson setup --reconfigure <BINARY_DIR> <SOURCE_DIR>
