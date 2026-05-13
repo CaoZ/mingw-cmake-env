@@ -1,7 +1,7 @@
 ExternalProject_Add(
   highway
-  URL https://github.com/google/highway/releases/download/1.2.0/highway-1.2.0.tar.gz
-  URL_HASH MD5=a03898e8e2b1bf43d00571ba1ab0d171
+  URL https://github.com/google/highway/releases/download/1.4.0/highway-1.4.0.tar.gz
+  URL_HASH MD5=1099da4b7721315b88e16c74827d6fa1
   DOWNLOAD_EXTRACT_TIMESTAMP 1
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND
@@ -12,7 +12,7 @@ ExternalProject_Add(
     -DHWY_CMAKE_ARM7=OFF
     -DHWY_CMAKE_HEADER_ONLY=OFF
     -DHWY_CMAKE_RVV=OFF
-    -DHWY_CMAKE_SSE2=OFF
+    -DHWY_CMAKE_SSE2=ON
     -DHWY_ENABLE_CONTRIB=ON
     -DHWY_ENABLE_EXAMPLES=OFF
     -DHWY_ENABLE_INSTALL=ON

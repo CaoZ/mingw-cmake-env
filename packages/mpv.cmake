@@ -8,6 +8,7 @@ ExternalProject_Add(
           libjpeg
           libplacebo
           libpng
+          sdl2
           luajit
           mujs
           openal
@@ -33,6 +34,9 @@ ExternalProject_Add(
     -Dmanpage-build=disabled
     -Dopenal=enabled
     -Drubberband=enabled
+    -Dsdl2-audio=disabled
+    -Dsdl2-gamepad=enabled
+    -Dsdl2-video=disabled
     -Dshaderc=enabled
     -Dspirv-cross=enabled
     -Duchardet=enabled
@@ -72,7 +76,11 @@ ExternalProject_Add_Step(
   COMMAND
     ${CMAKE_COMMAND} -E copy
     <SOURCE_DIR>/etc/powershell-completion.ps1
-    ${CMAKE_CURRENT_BINARY_DIR}/mpv-package/powershell-completion.ps1)
+    ${CMAKE_CURRENT_BINARY_DIR}/mpv-package/powershell-completion.ps1
+  COMMAND
+    ${CMAKE_COMMAND} -E copy
+    <SOURCE_DIR>/etc/mpv-register.bat
+    ${CMAKE_CURRENT_BINARY_DIR}/mpv-package/mpv-register.bat)
 
 force_rebuild_git(mpv)
 force_meson_configure(mpv)

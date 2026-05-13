@@ -1,8 +1,8 @@
 ExternalProject_Add(
   vulkan-loader
   DEPENDS vulkan-headers
-  URL https://github.com/KhronosGroup/Vulkan-Loader/archive/refs/tags/v1.4.315.tar.gz
-  URL_HASH MD5=0a312c32a1b8d789747bc1d35d31278b
+  URL https://github.com/KhronosGroup/Vulkan-Loader/archive/refs/tags/v1.4.350.tar.gz
+  URL_HASH MD5=b6ed2d54f438983f715e12450ca655d7
   DOWNLOAD_EXTRACT_TIMESTAMP 1
   UPDATE_COMMAND ""
   PATCH_COMMAND ${EXEC} patch -p1 < ${CMAKE_CURRENT_SOURCE_DIR}/vulkan-loader-0001.patch
@@ -10,9 +10,13 @@ ExternalProject_Add(
     ${EXEC} cmake -H<SOURCE_DIR> -B<BINARY_DIR>
     ${cmake_conf_args}
     -DVULKAN_HEADERS_INSTALL_DIR=${MINGW_INSTALL_PREFIX}
+    -DBUILD_WERROR=OFF
+    -DCODE_COVERAGE=OFF
+    -DLOADER_CODEGEN=OFF
+    -DLOADER_USE_UNSAFE_FILE_SEARCH=OFF
+    -DUPDATE_DEPS=OFF
+    -DUSE_MASM=ON
     -DBUILD_STATIC_LOADER=ON
-    -DENABLE_WERROR=OFF
-    -DUSE_GAS=ON
     -DCMAKE_C_FLAGS='${CMAKE_C_FLAGS} -D_WIN32_WINNT=0x0A00 -D__STDC_FORMAT_MACROS -DSTRSAFE_NO_DEPRECATE -Dparse_number=cjson_parse_number'
     -DCMAKE_CXX_FLAGS='${CMAKE_CXX_FLAGS} -D__USE_MINGW_ANSI_STDIO -D__STDC_FORMAT_MACROS -fpermissive -D_WIN32_WINNT=0x0A00'
   BUILD_COMMAND ${NINJA} -C <BINARY_DIR>
@@ -31,3 +35,14 @@ ExternalProject_Add(
   LOG_BUILD 1
   LOG_INSTALL 1)
 
+ExternalProject_Add_Step(
+  vulkan-loader manual-install
+  DEPENDEES build
+  COMMAND
+    ${CMAKE_COMMAND} -E copy
+    <BINARY_DIR>/loader/libvulkan.a
+    ${MINGW_INSTALL_PREFIX}/lib/libvulkan.a
+  COMMAND
+    ${CMAKE_COMMAND} -E copy
+    <BINARY_DIR>/loader/vulkan_own.pc
+    ${MINGW_INSTALL_PREFIX}/lib/pkgconfig/vulkan.pc)

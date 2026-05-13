@@ -15,7 +15,7 @@ ExternalProject_Add(
           libopusenc
           libplacebo
           libpng
-          libsdl2
+          sdl2
           libvpl
           libvpx
           libwebp
@@ -25,12 +25,13 @@ ExternalProject_Add(
           rubberband
           shaderc
           spirv-cross
+          spirv-headers
           svtav1
           vorbis
           vulkan-loader
           x264
           x265
-  GIT_REPOSITORY https://github.com/librempeg/librempeg.git
+  GIT_REPOSITORY https://github.com/rorgoroth/librempeg.git
   GIT_SHALLOW 1
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND
@@ -46,18 +47,20 @@ ExternalProject_Add(
     --disable-decoder=libaom_av1
     --disable-doc
     --disable-htmlpages
+    --disable-hwaccel=prores_vulkan
     --disable-manpages
     --disable-podpages
     --disable-txtpages
+    --disable-unstable
     --disable-vaapi
     --disable-vdpau
     --disable-videotoolbox
+    --enable-agpl --enable-gpl --enable-version3 --enable-nonfree
     --enable-amf
     --enable-cross-compile
     --enable-ffmpeg
     --enable-ffplay
     --enable-ffprobe
-    --enable-gpl --enable-version3 --enable-nonfree
     --enable-lcms2
     --enable-libaom
     --enable-libass

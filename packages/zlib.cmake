@@ -1,7 +1,7 @@
 ExternalProject_Add(
   zlib
-  URL https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.2.4.tar.gz
-  URL_HASH MD5=19bc00d414477868f4572971156e5a5a
+  URL https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.3.3.tar.gz
+  URL_HASH MD5=72337e6a7d2662af50a4ed0274c61b7e
   DOWNLOAD_EXTRACT_TIMESTAMP 1
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND

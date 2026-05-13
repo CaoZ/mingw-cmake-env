@@ -14,22 +14,23 @@ These all come with update scripts, however if one breaks it is on you to keep b
 
 [mpv](https://github.com/mpv-player/mpv): Media player, git builds.
 
-[Quake2pro](https://github.com/skullernet/q2pro): Enhanced Quake 2 client and server focused on multiplayer, git builds.
-
-[Quake3e OpenArena](https://github.com/rorgoroth/Quake3e-OpenArena): Completely FOSS version of Quake 3, client only (based on Quake3e using Vulkan), git builds.
-
 [Quake3e](https://github.com/ec-/Quake3e): Quake3 optimized client using Vulkan, git builds.
 
 [Quake3e Urban Terror](https://github.com/rorgoroth/Quake3e-UrbanTerror): Quake3 mod and standalone game, client only (based on Quake3e, using Vulkan), git builds.
 
 [xonotic](https://github.com/rorgoroth/darkplaces-mingw-w64): Client only, git builds.
 
+### Retired Packages
+[Quake2pro](https://github.com/rorgoroth/q2pro): Enhanced Quake 2 client and server focused on multiplayer, git builds. See projects release page for the final binary release.
+
+[Quake3e OpenArena](https://github.com/rorgoroth/Quake3e-OpenArena): OpenArena compatible client based on quake3e. See projects release page for the final binary release, also consider using a better alternative: [OmegA-engine](https://github.com/Bishop-333/OmegA-engine)
+
 ## Build Instructions
 
 Basic build deps:
 
 ```bash
-apk add -i 7zip autoconf automake bash ccache clang llvm llvm-linker-tools lld cmake coreutils diffutils g++ gawk gcc gettext-dev git libtool make meson mimalloc2-insecure musl-dev nasm patch pkgconf po4a py3-mako samurai texinfo util-linux-misc yasm
+apk add -i 7zip autoconf automake bash ccache clang cmake coreutils curl diffutils g++ gawk gcc gettext-dev git gperf libtool lld llvm llvm-linker-tools make meson musl-dev nasm patch pkgconf po4a py3-jinja2 py3-mako samurai texinfo util-linux-misc yasm
 ```
 
 Setup/Build:

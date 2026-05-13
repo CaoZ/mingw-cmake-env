@@ -2,10 +2,9 @@ ExternalProject_Add(
   harfbuzz
   DEPENDS freetype2
           libpng
-  GIT_REPOSITORY https://github.com/harfbuzz/harfbuzz.git
-  GIT_REMOTE_NAME origin
-  GIT_TAG main
-  GIT_SHALLOW 1
+  URL https://github.com/harfbuzz/harfbuzz/archive/refs/tags/14.2.0.tar.gz
+  URL_HASH MD5=b13778d174b695223d1810bdc3fb0430
+  DOWNLOAD_EXTRACT_TIMESTAMP 1
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND
     ${EXEC} meson setup --reconfigure <BINARY_DIR> <SOURCE_DIR>
@@ -15,6 +14,8 @@ ExternalProject_Add(
     -Dglib=disabled
     -Dgobject=disabled
     -Dicu=disabled
+    -Dtests=disabled
+    -Dutilities=disabled
   BUILD_COMMAND ${NINJA} -C <BINARY_DIR>
   INSTALL_COMMAND ${NINJA} -C <BINARY_DIR> install
   LOG_DOWNLOAD 1
@@ -23,5 +24,4 @@ ExternalProject_Add(
   LOG_BUILD 1
   LOG_INSTALL 1)
 
-force_rebuild_git(harfbuzz)
-force_meson_configure(harfbuzz)
+  force_meson_configure(harfbuzz)

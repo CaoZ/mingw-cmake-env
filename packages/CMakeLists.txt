@@ -131,7 +131,9 @@ list(
   highway
   libjxl
   fdk-aac
-  libsdl2
+  sdl2
+  sdl3
+  spirv-headers
   ffmpeg
   openal
   mujs
@@ -143,10 +145,8 @@ list(
   minizip
   glew
   sqlite
-  quake2pro
   quake3e
   quake3e-urbanterror
-  quake3e-openarena
   xonotic
 )
 

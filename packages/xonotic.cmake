@@ -1,7 +1,8 @@
 ExternalProject_Add(
   xonotic
   DEPENDS libjpeg
-          libsdl2
+          sdl2
+          zlib
   GIT_REPOSITORY https://github.com/rorgoroth/darkplaces-mingw-w64.git
   GIT_SHALLOW 1
   UPDATE_COMMAND ""
