@@ -1,0 +1,114 @@
+ExternalProject_Add(
+  librempeg
+  DEPENDS amf-headers
+          aom
+          bzip2
+          dav1d
+          fdk-aac
+          flac
+          fontconfig
+          harfbuzz
+          lcms2
+          lame
+          libass
+          libjxl
+          libopusenc
+          libplacebo
+          libpng
+          sdl2
+          libvpl
+          libvpx
+          libwebp
+          libxml2
+          libzimg
+          nvcodec-headers
+          rubberband
+          shaderc
+          spirv-cross
+          spirv-headers
+          svtav1
+          vorbis
+          vulkan-loader
+          x264
+          x265
+  GIT_REPOSITORY https://github.com/rorgoroth/librempeg.git
+  GIT_SHALLOW 1
+  UPDATE_COMMAND ""
+  CONFIGURE_COMMAND
+    ${EXEC} <SOURCE_DIR>/configure
+    --cc='ccache x86_64-w64-mingw32-gcc' --cxx='ccache x86_64-w64-mingw32-gcc'
+    --cross-prefix=x86_64-w64-mingw32-
+    --prefix=${MINGW_INSTALL_PREFIX}
+    --arch=x86_64
+    --target-os=mingw32
+    --target-exec=wine
+    --pkg-config-flags=--static
+    --disable-debug
+    --disable-decoder=libaom_av1
+    --disable-doc
+    --disable-htmlpages
+    --disable-hwaccel=prores_vulkan
+    --disable-manpages
+    --disable-podpages
+    --disable-txtpages
+    --disable-unstable
+    --disable-vaapi
+    --disable-vdpau
+    --disable-videotoolbox
+    --enable-agpl --enable-gpl --enable-version3 --enable-nonfree
+    --enable-amf
+    --enable-cross-compile
+    --enable-ffmpeg
+    --disable-ffplay
+    --enable-ffprobe
+    --enable-lcms2
+    --enable-libaom
+    --enable-libass
+    --enable-libdav1d
+    --enable-libfdk-aac
+    --enable-libfontconfig
+    --enable-libharfbuzz
+    --enable-libjxl
+    --enable-libmp3lame
+    --enable-libopus
+    --enable-libplacebo
+    --enable-librubberband
+    --enable-libshaderc
+    --enable-libsvtav1
+    --enable-libvorbis
+    --enable-libvpl
+    --enable-libvpx
+    --enable-libwebp
+    --enable-libx264
+    --enable-libx265
+    --enable-libxml2
+    --enable-libzimg
+    --enable-lto=thin
+    --enable-nvdec
+    --enable-nvenc
+    --enable-runtime-cpudetect
+    --enable-schannel
+    --enable-sdl2
+    --disable-vulkan
+    "--extra-libs='-lstdc++ -lpthread'" # libplacebo/shaderc
+  BUILD_COMMAND ${MAKE}
+  INSTALL_COMMAND ""
+  LOG_DOWNLOAD 1
+  LOG_UPDATE 1
+  LOG_CONFIGURE 1
+  LOG_BUILD 1
+  LOG_INSTALL 1)
+
+ExternalProject_Add_Step(
+  librempeg copy-binary
+  DEPENDEES install
+  COMMAND
+    ${CMAKE_COMMAND} -E copy
+    <BINARY_DIR>/ffmpeg.exe
+    ${CMAKE_CURRENT_BINARY_DIR}/librempeg-package/ffmpeg.exe
+  COMMAND
+    ${CMAKE_COMMAND} -E copy
+    <BINARY_DIR>/ffprobe.exe
+    ${CMAKE_CURRENT_BINARY_DIR}/librempeg-package/ffprobe.exe)
+
+force_rebuild_git(librempeg)

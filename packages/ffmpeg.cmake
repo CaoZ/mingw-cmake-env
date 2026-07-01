@@ -31,8 +31,11 @@ ExternalProject_Add(
           vulkan-loader
           x264
           x265
-  GIT_REPOSITORY https://github.com/rorgoroth/librempeg.git
-  GIT_SHALLOW 1
+  GIT_REPOSITORY https://github.com/FFmpeg/FFmpeg.git
+  GIT_REMOTE_NAME origin
+  GIT_TAG release/8.1
+#  GIT_SHALLOW 1
+
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND
     ${EXEC} <SOURCE_DIR>/configure
@@ -55,7 +58,7 @@ ExternalProject_Add(
     --disable-vaapi
     --disable-vdpau
     --disable-videotoolbox
-    --enable-agpl --enable-gpl --enable-version3 --enable-nonfree
+    --enable-gpl --enable-version3 --enable-nonfree
     --enable-amf
     --enable-cross-compile
     --enable-ffmpeg
