@@ -1,8 +1,8 @@
 ExternalProject_Add(
   vulkan-loader
   DEPENDS vulkan-headers
-  URL https://github.com/KhronosGroup/Vulkan-Loader/archive/refs/tags/v1.4.355.tar.gz
-  URL_HASH MD5=0615b3719b67bf81f3b5cc249e028b1f
+  URL https://github.com/KhronosGroup/Vulkan-Loader/archive/refs/tags/v1.4.356.tar.gz
+  URL_HASH MD5=bc9542cf5d4988ec008c2009b47d6c79
   DOWNLOAD_EXTRACT_TIMESTAMP 1
   UPDATE_COMMAND ""
   PATCH_COMMAND ${EXEC} patch -p1 < ${CMAKE_CURRENT_SOURCE_DIR}/vulkan-loader-0001.patch
@@ -34,15 +34,3 @@ ExternalProject_Add(
   LOG_CONFIGURE 1
   LOG_BUILD 1
   LOG_INSTALL 1)
-
-ExternalProject_Add_Step(
-  vulkan-loader manual-install
-  DEPENDEES build
-  COMMAND
-    ${CMAKE_COMMAND} -E copy
-    <BINARY_DIR>/loader/libvulkan.a
-    ${MINGW_INSTALL_PREFIX}/lib/libvulkan.a
-  COMMAND
-    ${CMAKE_COMMAND} -E copy
-    <BINARY_DIR>/loader/vulkan_own.pc
-    ${MINGW_INSTALL_PREFIX}/lib/pkgconfig/vulkan.pc)
