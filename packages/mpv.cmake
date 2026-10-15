@@ -12,7 +12,6 @@ ExternalProject_Add(
           sdl2
           luajit
           mujs
-          openal
           rubberband
           shaderc
           spirv-cross
@@ -24,6 +23,7 @@ ExternalProject_Add(
   CONFIGURE_COMMAND
     ${EXEC} meson setup --reconfigure <BINARY_DIR> <SOURCE_DIR>
     ${meson_conf_args}
+    -Db_lto=true
     -Db_lto_mode=thin
     -Db_ndebug=true
     -Dd3d11=enabled
@@ -34,10 +34,9 @@ ExternalProject_Add(
     -Dlibcurl=enabled
     -Dlua=enabled
     -Dmanpage-build=disabled
-    -Dopenal=enabled
     -Drubberband=enabled
     -Dsdl2-audio=disabled
-    -Dsdl2-gamepad=enabled
+    -Dsdl2-gamepad=disabled
     -Dsdl2-video=disabled
     -Dshaderc=enabled
     -Dspirv-cross=enabled
@@ -82,7 +81,11 @@ ExternalProject_Add_Step(
   COMMAND
     ${CMAKE_COMMAND} -E copy
     <SOURCE_DIR>/etc/mpv-register.bat
-    ${CMAKE_CURRENT_BINARY_DIR}/mpv-package/mpv-register.bat)
+    ${CMAKE_CURRENT_BINARY_DIR}/mpv-package/mpv-register.bat
+  COMMAND
+    ${CMAKE_COMMAND} -E copy
+    <SOURCE_DIR>/etc/mpv-unregister.bat
+    ${CMAKE_CURRENT_BINARY_DIR}/mpv-package/mpv-unregister.bat)
 
 force_rebuild_git(mpv)
 force_meson_configure(mpv)

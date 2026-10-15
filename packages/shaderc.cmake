@@ -1,4 +1,4 @@
-  ExternalProject_Add(
+ExternalProject_Add(
   shaderc
   GIT_REPOSITORY https://github.com/rorgoroth/mpv-shaderc.git
   GIT_SHALLOW 1
@@ -40,7 +40,6 @@
     -DSPIRV_SKIP_EXECUTABLES=ON
     -DSPIRV_SKIP_TESTS=ON
     -DSPIRV_TOOLS_BUILD_STATIC=ON
-    -DSPIRV_TOOLS_INSTALL_EMACS_HELP=OFF
     -DSPIRV_WARN_EVERYTHING=OFF
     -DSPIRV_WERROR=ON
     -Dgtest_force_shared_crt=ON

@@ -3,8 +3,8 @@ ExternalProject_Add(curl
           libpsl
           zlib
           zstd
-  URL https://github.com/curl/curl/releases/download/curl-8_21_0/curl-8.21.0.tar.bz2
-  URL_HASH MD5=97f958c7d9aff19b9ec2823d30e6fdb1
+  URL https://github.com/curl/curl/releases/download/curl-8_23_0/curl-8.23.0.tar.bz2
+  URL_HASH SHA256=95b22eb32bf6d1fa6e3e9463bdb61cece3efc56d86576a9b3cbd428246a6d854
   DOWNLOAD_EXTRACT_TIMESTAMP 1
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND
@@ -25,7 +25,6 @@ ExternalProject_Add(curl
     -DCURL_COMPLETION_ZSH=OFF
     -DCURL_DISABLE_CA_SEARCH=OFF
     -DCURL_DISABLE_INSTALL=OFF
-    -DCURL_DISABLE_OPENSSL_AUTO_LOAD=OFF
     -DCURL_ENABLE_SSL=ON
     -DCURL_LTO=OFF
     -DCURL_STATIC_CRT=ON
@@ -43,7 +42,6 @@ ExternalProject_Add(curl
     -DCURL_ZLIB=ON
     -DCURL_ZSTD=ON
     -DENABLE_ARES=OFF
-    -DENABLE_CURLDEBUG=OFF
     -DENABLE_CURL_MANUAL=OFF
     -DENABLE_DEBUG=OFF
     -DENABLE_THREADED_RESOLVER=ON
@@ -53,12 +51,9 @@ ExternalProject_Add(curl
     -DPICKY_COMPILER=ON
     -DUSE_ECH=OFF
     -DUSE_HTTPSRR=OFF
-    -DUSE_LIBIDN2=0FF
-    -DUSE_LIBRTMP=OFF
-    -DUSE_MSH3=OFF
+    -DUSE_LIBIDN2=OFF
     -DUSE_NGHTTP2=OFF
     -DUSE_NGTCP2=OFF
-    -DUSE_OPENSSL_QUIC=OFF
     -DUSE_QUICHE=OFF
     -DUSE_SSLS_EXPORT=OFF
     -DUSE_WIN32_IDN=OFF

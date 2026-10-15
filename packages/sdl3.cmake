@@ -1,7 +1,7 @@
 ExternalProject_Add(
   sdl3
-  URL https://github.com/libsdl-org/SDL/archive/refs/tags/release-3.4.12.tar.gz
-  URL_HASH MD5=30e75c2ca6fe03dfcac8fc6d0b4b6f13
+  URL https://github.com/libsdl-org/SDL/releases/download/release-3.4.18/SDL3-3.4.18.tar.gz
+  URL_HASH SHA256=9c75cf16330322c217dedd2e0609f1124f1b54b8633e763467b4684d0f4334a3
   DOWNLOAD_EXTRACT_TIMESTAMP 1
   CONFIGURE_COMMAND
     ${EXEC} cmake -H<SOURCE_DIR> -B<BINARY_DIR>
@@ -29,7 +29,6 @@ ExternalProject_Add(
     -DSDL_EXAMPLES=OFF
     -DSDL_FOREGROUNDING_SIGNAL=OFF
     -DSDL_GCC_ATOMICS=ON
-    -DSDL_GPU_DXVK=OFF
     -DSDL_GPU=ON
     -DSDL_HAPTIC=ON
     -DSDL_HIDAPI_JOYSTICK=ON

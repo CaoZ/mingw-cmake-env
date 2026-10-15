@@ -36,7 +36,7 @@ ExternalProject_Add(
   UPDATE_COMMAND ""
   CONFIGURE_COMMAND
     ${EXEC} <SOURCE_DIR>/configure
-    --cc='ccache x86_64-w64-mingw32-gcc' --cxx='ccache x86_64-w64-mingw32-gcc'
+    --cc='ccache x86_64-w64-mingw32-gcc' --cxx='ccache x86_64-w64-mingw32-g++'
     --cross-prefix=x86_64-w64-mingw32-
     --prefix=${MINGW_INSTALL_PREFIX}
     --arch=x86_64
@@ -51,11 +51,9 @@ ExternalProject_Add(
     --disable-manpages
     --disable-podpages
     --disable-txtpages
-    --disable-unstable
     --disable-vaapi
     --disable-vdpau
     --disable-videotoolbox
-    --disable-vulkan
     --enable-amf
     --enable-cross-compile
     --enable-ffmpeg
@@ -88,6 +86,7 @@ ExternalProject_Add(
     --enable-runtime-cpudetect
     --enable-schannel
     --enable-sdl2
+    --enable-vulkan
     "--extra-libs='-lstdc++ -lpthread'" # libplacebo/shaderc
   BUILD_COMMAND ${MAKE}
   INSTALL_COMMAND ${MAKE} install

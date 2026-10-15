@@ -1,7 +1,7 @@
 ExternalProject_Add(
   expat
-  URL https://github.com/libexpat/libexpat/releases/download/R_2_8_2/expat-2.8.2.tar.bz2
-  URL_HASH MD5=666d3631746d921fd074822f7027c5fe
+  URL https://github.com/libexpat/libexpat/releases/download/R_2_9_0/expat-2.9.0.tar.bz2
+  URL_HASH SHA256=775e8a68f81a748a401dc3168318d4a39484eb4f954726f21517c8f42c0ba984
   DOWNLOAD_EXTRACT_TIMESTAMP 1
   CONFIGURE_COMMAND
     ${EXEC} cmake -H<SOURCE_DIR> -B<BINARY_DIR>
@@ -18,7 +18,6 @@ ExternalProject_Add(
     -DEXPAT_SHARED_LIBS=OFF
     -DEXPAT_WARNINGS_AS_ERRORS=OFF
     -DEXPAT_WITH_GETRANDOM=AUTO
-    -DEXPAT_WITH_LIBBSD=OFF
     -DEXPAT_WITH_SYS_GETRANDOM=AUTO
   BUILD_COMMAND ${NINJA} -C <BINARY_DIR>
   INSTALL_COMMAND ${NINJA} -C <BINARY_DIR> install

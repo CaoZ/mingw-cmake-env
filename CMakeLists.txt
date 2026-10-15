@@ -3,7 +3,6 @@ project(mingw-env LANGUAGES C ASM CXX)
 
 include(ExternalProject)
 include(ProcessorCount)
-include(CheckCCompilerFlag)
 
 # Generator Check
 if(NOT CMAKE_GENERATOR STREQUAL "Ninja")
@@ -32,12 +31,14 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/install" CACHE PATH "Default install path" FORCE)
 endif()
 set(MINGW_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}/x86_64-w64-mingw32)
+set(RUSTUP_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/install_rustup" CACHE STRING "Rust toolchain path")
 
 # Configuration Files
 set(CONFIG_FILES
     packages/ccache.conf.in
     packages/toolchain.cmake.in
     packages/meson_cross.txt.in
+    packages/cargo_config.in
     packages/exec.in
     packages/exec-nolto.in
 )
@@ -60,6 +61,9 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/packages/meson_cross.txt.in
                ${CMAKE_CURRENT_BINARY_DIR}/meson_cross.txt @ONLY)
 set(MESON_CROSS ${CMAKE_CURRENT_BINARY_DIR}/meson_cross.txt)
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/packages/cargo_config.in
+               ${RUSTUP_LOCATION}/.cargo/config @ONLY)
+
 # Generate exec scripts
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/packages/exec.in
                ${CMAKE_CURRENT_BINARY_DIR}/exec @ONLY)
@@ -67,11 +71,11 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/packages/exec-nolto.in
                ${CMAKE_CURRENT_BINARY_DIR}/exec-nolto @ONLY)
 
 set(EXEC ${CMAKE_CURRENT_BINARY_DIR}/exec)
-set(EXEC-NLTO ${CMAKE_CURRENT_BINARY_DIR}/exec-nolto)
+set(EXEC_NLTO ${CMAKE_CURRENT_BINARY_DIR}/exec-nolto)
 
 # Set executable permissions on generated scripts
 if(UNIX)
-    execute_process(COMMAND chmod +x ${EXEC} ${EXEC-NLTO}
+    execute_process(COMMAND chmod +x ${EXEC} ${EXEC_NLTO}
                     RESULT_VARIABLE CHMOD_RESULT)
     if(NOT CHMOD_RESULT EQUAL 0)
         message(WARNING "Failed to set executable permissions on generated scripts.")
@@ -80,8 +84,8 @@ endif()
 
 set(MAKE ${EXEC} make -j${MAKEJOBS})
 set(NINJA ${EXEC} ninja -j${MAKEJOBS})
-set(MAKE-NLTO ${EXEC-NLTO} make -j${MAKEJOBS})
-set(NINJA-NLTO ${EXEC-NLTO} ninja -j${MAKEJOBS})
+set(MAKE_NLTO ${EXEC_NLTO} make -j${MAKEJOBS})
+set(NINJA_NLTO ${EXEC_NLTO} ninja -j${MAKEJOBS})
 
 string(TIMESTAMP BUILDDATE "%Y%m%d" UTC)
 
