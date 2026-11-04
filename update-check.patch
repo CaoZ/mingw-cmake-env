@@ -1,0 +1,63 @@
+diff --git a/packages/CMakeLists.txt b/packages/CMakeLists.txt
+index 4a5e922..c0dfb54 100644
+--- a/packages/CMakeLists.txt
++++ b/packages/CMakeLists.txt
+@@ -160,6 +160,7 @@ list(
+   glew
+   sdl3-image
+   sdl3-mixer
++  sdl3-ttf
+   sqlite
+   quake3e
+   quake3e-urbanterror
+diff --git a/packages/sdl3-ttf.cmake b/packages/sdl3-ttf.cmake
+new file mode 100644
+index 0000000..d97c73c
+--- /dev/null
++++ b/packages/sdl3-ttf.cmake
+@@ -0,0 +1,27 @@
++ExternalProject_Add(
++  sdl3-ttf
++  DEPENDS freetype2
++          harfbuzz
++          sdl3
++  URL https://github.com/libsdl-org/SDL_ttf/releases/download/release-3.2.2/SDL3_ttf-3.2.2.tar.gz
++  URL_HASH SHA256=63547d58d0185c833213885b635a2c0548201cc8f301e6587c0be1a67e1e045d
++  DOWNLOAD_EXTRACT_TIMESTAMP 1
++  CONFIGURE_COMMAND
++    ${EXEC} cmake -H<SOURCE_DIR> -B<BINARY_DIR>
++    ${cmake_conf_args}
++    -DSDLTTF_HARFBUZZ=ON
++    -DSDLTTF_INSTALL=ON
++    -DSDLTTF_INSTALL_CPACK=OFF
++    -DSDLTTF_INSTALL_MAN=OFF
++    -DSDLTTF_PLUTOSVG=OFF
++    -DSDLTTF_SAMPLES=OFF
++    -DSDLTTF_STRICT=ON
++    -DSDLTTF_VENDORED=OFF
++    -DSDLTTF_WERROR=OFF
++  BUILD_COMMAND ${NINJA} -C <BINARY_DIR>
++  INSTALL_COMMAND ${NINJA} install
++  LOG_DOWNLOAD 1
++  LOG_UPDATE 1
++  LOG_CONFIGURE 1
++  LOG_BUILD 1
++  LOG_INSTALL 1)
+diff --git a/packages/update-check.sh b/packages/update-check.sh
+index 30c4599..a9e744d 100644
+--- a/packages/update-check.sh
++++ b/packages/update-check.sh
+@@ -278,6 +278,13 @@ b=$(git ls-remote --tags 'https://github.com/libsdl-org/SDL_mixer.git' | sed -n
+ check
+ update "$a" "$b"
+
++# sdl3-ttf
++pkg=sdl3-ttf
++a=$(cat ./packages/sdl3-ttf.cmake | grep 'release-' | sed -n 's,.*release-\([0-9.]*\)/.*,\1,p')
++b=$(git ls-remote --tags 'https://github.com/libsdl-org/SDL_ttf.git' | sed -n 's,.*refs/tags/release-\([0-9][0-9.]*\)$,\1,p' | grep '^3\.' | sort -Vr | head -1)
++check
++update "$a" "$b"
++
+ # libxml2
+ pkg=libxml2
+ a=$(cat ./packages/libxml2.cmake | grep 'libxml2' | sed -n 's,.*v\([0-9][^>]*\)\.tar.*,\1,p')

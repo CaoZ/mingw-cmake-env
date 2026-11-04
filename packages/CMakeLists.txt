@@ -138,6 +138,7 @@ list(
   flac
   opus
   libopusenc
+  opusfile
   vorbis
   theora
   x264
@@ -147,8 +148,8 @@ list(
   highway
   libjxl
   fdk-aac
-  sdl2
   sdl3
+  sdl2-compat
   spirv-headers
   librempeg
   ffmpeg
@@ -157,6 +158,9 @@ list(
   cjson
   minizip
   glew
+  sdl3-image
+  sdl3-mixer
+  sdl3-ttf
   sqlite
   quake3e
   quake3e-urbanterror
