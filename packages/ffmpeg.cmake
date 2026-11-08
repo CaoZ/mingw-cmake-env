@@ -12,7 +12,6 @@ ExternalProject_Add(
           lame
           libass
           libjxl
-          libopusenc
           libplacebo
           libpng
           libvpl
@@ -21,6 +20,8 @@ ExternalProject_Add(
           libxml2
           libzimg
           nvcodec-headers
+          openssl
+          opus
           rubberband
           spirv-cross
           spirv-headers
@@ -84,7 +85,7 @@ ExternalProject_Add(
     --enable-nvdec
     --enable-nvenc
     --enable-runtime-cpudetect
-    --enable-schannel
+    --enable-openssl
     --enable-vulkan
     "--extra-libs='-lstdc++ -lpthread'" # libplacebo/shaderc
   BUILD_COMMAND ${MAKE}
