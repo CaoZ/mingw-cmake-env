@@ -97,6 +97,22 @@ ExternalProject_Add(
   LOG_INSTALL 1)
 
 ExternalProject_Add_Step(
+  librempeg purge-libplacebo
+  DEPENDEES configure
+  DEPENDERS build
+  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libplacebo-prefix/src/libplacebo-stamp/libplacebo-install
+  WORKING_DIRECTORY <BINARY_DIR>
+  COMMAND find . -name "*libplacebo*.o" -delete)
+
+ExternalProject_Add_Step(
+  librempeg purge-x265
+  DEPENDEES configure
+  DEPENDERS build
+  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/x265-prefix/src/x265-stamp/x265-install
+  WORKING_DIRECTORY <BINARY_DIR>
+  COMMAND find . -name "libx265*.o" -delete)
+
+ExternalProject_Add_Step(
   librempeg copy-binary
   DEPENDEES install
   COMMAND
